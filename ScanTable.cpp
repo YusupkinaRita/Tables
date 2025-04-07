@@ -8,7 +8,7 @@ void ScanTable::InsRecord(const Key& key, PDatValue value){
     if(IsFull())
         throw "table is full";
     else{
-        //_records[_dataCount]=new TabRecord(key, value);//нужно override print прям тут
+        _records[_dataCount]=new TabRecord(key, value);
         _dataCount++;
     }
 
