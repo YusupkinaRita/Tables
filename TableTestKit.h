@@ -11,15 +11,16 @@ public:
     TableTestKit(Table& table);
     void FillTable();
 
-    void GenBenchmarkTab();//генерация таблицы какой-то(?)
+    void GenBenchmarkTab(size_t size=100);//генерация таблицы какой-то(?)
 
     void ShowTable();
 
     void FindRecord();//запуск на 100 рандомно выбранных записях
     void DelRecord();//запуск на 100 рандомно выбранных записях
 
-    void PrintMetrics();//распечатать количество итераций, время и ошибки на выполнение какой-то задачи
+    void PrintMetricsFind();//распечатать количество итераций, время и ошибки на выполнение какой-то задачи
 
+    void PrintMetricsDel();
 
 
 

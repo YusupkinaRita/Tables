@@ -21,12 +21,12 @@ public:
     int GetEfficiency()const{return _efficiency;};
     bool IsEmpty()const{return _dataCount==0;}
     virtual bool IsFull()const =0;
-    virtual Key Getkey() const=0;
-    virtual PDatValue GetValue()const=0;
+    virtual Key GetKey() const=0;
+    virtual PDatValue GetValuePtr()const=0;
 
 
     //методы вставки, поиска и удаления
-    virtual PDatValue Find(const Key& key)=0;
+    virtual PDatValue FindRecord(const Key& key)=0;
     virtual void InsRecord(const Key& key, PDatValue value)=0;
     virtual void DelRecord(const Key& key)=0;
 

@@ -7,10 +7,11 @@ Key ArrayTable::GetKey(DataPos position)const{
         case First: return _records[0]->_key;
         case Current:return _records[_curPos]->_key;
         case Last:return _records[_dataCount-1]->_key;
-        default:break;
+        default: break;
         }
     }
 }
+
 PDatValue ArrayTable::GetValuePtr(DataPos position)const{
     if(!IsEmpty()){
         switch(position){
@@ -20,6 +21,7 @@ PDatValue ArrayTable::GetValuePtr(DataPos position)const{
         default:return nullptr;
         }
     }
+    
 
 }
 

@@ -2,6 +2,19 @@
 
 
 PDatValue ScanTable::FindRecord(const Key& key){
+    if(IsEmpty())
+        throw "table is empty";
+    Reset();
+    PDatValue res;
+    bool x=0;
+    while(x!=1){
+        if (GetKey(Current)==key)
+            return GetValuePtr(Current);
+        x=GoNext();
+        _efficiency++;
+    }
+    std::cout<<"the key is not in the table"<<std::endl;
+        return 0;
 
 }
 void ScanTable::InsRecord(const Key& key, PDatValue value){
