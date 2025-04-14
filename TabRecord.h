@@ -11,18 +11,26 @@ protected:
     Key _key;
 
 public:
-    TabRecord(Key key="", PDatValue data=nullptr);
-    void SetKey(Key key);
-    Key GetKey()const;
-    void SetData(PDatValue data);
-    PDatValue GetData()const;
+    TabRecord(Key key="", PDatValue data=nullptr){
 
-    virtual PDatValue GetCopy();
-    TabRecord& operator=(const TabRecord& tr);
+    }
+    void SetKey(Key key){}
+    Key GetKey()const{}
+    void SetData(PDatValue data){}
+    PDatValue GetData()const{}
 
-    virtual bool operator==(const TabRecord& tr)const;
-    virtual bool operator>(const TabRecord& tr)const;
-    virtual bool operator<(const TabRecord& tr)const;
+    virtual PDatValue GetCopy(){}
+    TabRecord& operator=(const TabRecord& tr){}
+
+    virtual bool operator==(const TabRecord& tr)const{
+        return true;
+    }
+    virtual bool operator>(const TabRecord& tr)const{
+        return true;
+    }
+    virtual bool operator<(const TabRecord& tr)const{
+        return true;
+    }
 
     friend class ScanTable;
     friend class ArrayTable;
