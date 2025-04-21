@@ -16,7 +16,7 @@ protected:
     void MergeData(PTabRecord* &pData, PTabRecord* &pBuf, size_t n1, size_t n2);
 
     void QuickSort(PTabRecord* pMem, size_t count);
-    void QuickSplit(PTabRecord* pMem, size_t size, size_t pivot);
+    void QuickSplit(PTabRecord* pMem, size_t size, size_t& pivot);
 
 public:
     SortTable(size_t tabSize=25):ScanTable(tabSize){}
