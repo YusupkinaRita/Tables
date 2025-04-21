@@ -8,7 +8,8 @@ private:
 
 
 public:
-    TableTestKit(Table& table);
+    TableTestKit(Table& table):_table(table){
+    };
     void FillTable();
 
     void GenBenchmarkTab(size_t size=100);//генерация таблицы какой-то(?)

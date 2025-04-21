@@ -12,24 +12,37 @@ protected:
 
 public:
     TabRecord(Key key="", PDatValue data=nullptr){
-
+        _key=key;
+        _data=data;
     }
-    void SetKey(Key key){}
-    Key GetKey()const{}
-    void SetData(PDatValue data){}
-    PDatValue GetData()const{}
+    void SetKey(Key key){
+        _key=key;}
+    Key GetKey()const{
+        return _key;}
+    void SetData(PDatValue data){
+        _data=data;
+    }
+    PDatValue GetData()const{
+        return _data;
+    }
 
-    virtual PDatValue GetCopy(){}
-    TabRecord& operator=(const TabRecord& tr){}
+    virtual PDatValue GetCopy(){
+        return _data->GetCopy(); 
+    }
+    TabRecord& operator=(const TabRecord& tr){
+        _data= tr._data;
+        _key=tr._key;
+        return *this;
+    }
 
     virtual bool operator==(const TabRecord& tr)const{
-        return true;
+        return _key==tr._key;
     }
     virtual bool operator>(const TabRecord& tr)const{
-        return true;
+        return _key>tr._key;
     }
     virtual bool operator<(const TabRecord& tr)const{
-        return true;
+        return _key<tr._key;
     }
 
     friend class ScanTable;

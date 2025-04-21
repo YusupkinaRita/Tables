@@ -55,8 +55,6 @@ void SortTable::QuickSplit(PTabRecord* pMem, size_t size, size_t pivot){
 
 PDatValue SortTable::FindRecord(const Key& key){
 
-
-//не забудь эфишенси увеличивать, вроде надо
 }
 void SortTable::InsRecord(const Key& key, PDatValue value){
     if(IsFull())
