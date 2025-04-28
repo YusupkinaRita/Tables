@@ -12,7 +12,7 @@ public:
     };
     void FillTable();
 
-    void GenBenchmarkTab(size_t size=100);//генерация таблицы какой-то(?)
+    void GenBenchmarkTab(size_t size=100);//генерация таблицы какой-то(?)в файл и из файла считать в _table
 
     void ShowTable();
 
