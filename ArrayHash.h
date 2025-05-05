@@ -8,7 +8,7 @@ protected:
     PTabRecord* _records;
     size_t _tabSize;
     size_t _curPos;
-    size_t _freePos;
+    long _freePos;
     size_t _hashStep;
     PTabRecord _mark;//отличать удаленные записи от тех, которые не были никогда заняты
     size_t GetNextPos(size_t pos){

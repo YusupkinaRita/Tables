@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Table.h"
 
@@ -6,7 +7,5 @@ protected:
     virtual size_t HashFunc(const Key& key);
 public:
     HashTable():Table(){
-        
     }
-
 };
