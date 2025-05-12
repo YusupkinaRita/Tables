@@ -1,16 +1,35 @@
 #include "TableTestKit.h"
 #include "ArrayTable.h"
 #include <chrono>
+#include <fstream>
+#include <filesystem>
+#include <random>
+
+static Key GenRandKey(size_t size=8){
+    std::string letters= "abcdefghijklmnopqrstuvwxyz";
+
+    std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<> dist(0, letters.size() - 1);
+
+    std::string res_key="";
+
+    for(size_t i=0; i<size; i++){
+        if(i==0)
+            res_key+=std::toupper(letters[dist(rng)]);
+        res_key+=letters[dist(rng)];
+   }
+   return res_key;
+}
+
 
 
 
 
 void TableTestKit::GenBenchmarkTab(size_t size){
-    for (size_t i = 0; i < size; ++i) {
-        Key key = "Key" + std::to_string(i); 
-        PDatValue value;             
-        _table.InsRecord(key, value);
-    }
+    std::string filename="benchmark.txt";
+    
+
+
 
 
 }
@@ -43,34 +62,34 @@ void TableTestKit::DelRecord(){
 
 }
 
-void TableTestKit::PrintMetricsFind(){
-    GenBenchmarkTab();
-    int exception_count=0;
-    auto start = std::chrono::high_resolution_clock::now();
-    try{FindRecord();}
-    catch(const char* error_message){
-        exception_count++;
-    }
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "Time for find: " << duration.count() << std::endl;
-    std::cout<<"exceptions in find: "<<exception_count<<std::endl;
-    std::cout<<"efficiensy for find is"<<_table.GetEfficiency()<<std::endl;
+// void TableTestKit::PrintMetricsFind(){
+//     GenBenchmarkTab();
+//     int exception_count=0;
+//     auto start = std::chrono::high_resolution_clock::now();
+//     try{FindRecord();}
+//     catch(const char* error_message){
+//         exception_count++;
+//     }
+//     auto end = std::chrono::high_resolution_clock::now();
+//     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+//     std::cout << "Time for find: " << duration.count() << std::endl;
+//     std::cout<<"exceptions in find: "<<exception_count<<std::endl;
+//     std::cout<<"efficiensy for find is"<<_table.GetEfficiency()<<std::endl;
     
-}
+// }
 
-void TableTestKit::PrintMetricsDel(){
-    GenBenchmarkTab();
-    int exception_count=0;
-    auto start = std::chrono::high_resolution_clock::now();
-    try{DelRecord();}
-    catch(const char* error_message){
-        exception_count++;
-    }
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "Time for delete: " << duration.count() << std::endl;
-    std::cout<<"exceptions in delete: "<<exception_count<<std::endl;
-    std::cout<<"efficiensy for delete is"<<_table.GetEfficiency()<<std::endl;
+// void TableTestKit::PrintMetricsDel(){
+//     GenBenchmarkTab();
+//     int exception_count=0;
+//     auto start = std::chrono::high_resolution_clock::now();
+//     try{DelRecord();}
+//     catch(const char* error_message){
+//         exception_count++;
+//     }
+//     auto end = std::chrono::high_resolution_clock::now();
+//     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+//     std::cout << "Time for delete: " << duration.count() << std::endl;
+//     std::cout<<"exceptions in delete: "<<exception_count<<std::endl;
+//     std::cout<<"efficiensy for delete is"<<_table.GetEfficiency()<<std::endl;
     
-}
+// }

@@ -10,6 +10,7 @@ protected:
 public:
     DatValue(){}
     virtual DatValue* GetCopy()=0;
+    virtual DatValue* GetRand()=0;
 
     friend std::ostream& operator<<(std::ostream &os, const DatValue& dv){
         if(&dv!=nullptr){

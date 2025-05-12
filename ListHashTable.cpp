@@ -19,9 +19,9 @@ PDatValue ListHashTable::FindRecord(const Key& key){}
 void ListHashTable::InsRecord(const Key& key, PDatValue data){}
 void ListHashTable::DelRecord(const Key& key){}
 
-bool ListHashTable::Reset();
+bool ListHashTable::Reset(){}
 bool ListHashTable::IsTabEnded()const {}
-bool ListHashTable::GoNext()override;
+bool ListHashTable::GoNext(){}
 
-Key ListHashTable::GetKey() const override;
-PDatValue ListHashTable::GetValuePtr()const override;
+Key ListHashTable::GetKey() const{}
+PDatValue ListHashTable::GetValuePtr()const {}

@@ -36,6 +36,15 @@ public:
         return copy;
 
     }
+    Marks* GetRand() override{
+        uint16_t math=2+rand()%4;
+        uint16_t cs=2+rand()%4;
+        uint16_t eng=2+rand()%4;
+        uint16_t phys=2+rand()%4;
+        Marks* tmp=new Marks(math, cs, eng, phys);
+        return tmp;
+
+    }
 
 
     

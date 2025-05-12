@@ -29,6 +29,9 @@ public:
     virtual PDatValue GetCopy(){
         return _data->GetCopy(); 
     }
+    virtual PDatValue GetRand(){
+        return _data->GetRand(); 
+    }
     TabRecord& operator=(const TabRecord& tr){
         _data= tr._data;
         _key=tr._key;
