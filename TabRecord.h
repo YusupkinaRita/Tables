@@ -1,5 +1,6 @@
 #pragma once
 #include "DatValue.h"
+#include <sstream>
 
 
 
@@ -31,6 +32,20 @@ public:
     }
     virtual PDatValue GetRand(){
         return _data->GetRand(); 
+    }
+    std::string ToStr()override{
+        std::string str=_key+ "|";
+        str+=_data->ToStr();
+        return str;
+    }
+    void Deserialise(std::string str)override{
+        std::istringstream iss(str);
+
+        std::getline(iss, _key, '|'); 
+        std::string data_str;
+        std::getline(iss, data_str);
+        _data->Deserialise(data_str);
+
     }
     TabRecord& operator=(const TabRecord& tr){
         _data= tr._data;

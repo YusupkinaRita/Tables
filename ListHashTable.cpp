@@ -16,7 +16,7 @@ ListHashTable::~ListHashTable(){
 }
 
 
-bool ListHashTable::IsFull(){
+bool ListHashTable::IsFull()const{
     bool res=false;
     try{
        PTabRecord a=new TabRecord(); 

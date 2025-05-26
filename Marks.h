@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DatValue.h"
 #include <cstdint>
+#include <sstream>
 
 
 class Marks:public DatValue{
@@ -25,10 +26,18 @@ public:
     }
 
     void Print(std::ostream &os)const override{
-        os<<"math mark :"<<_math<<" ";
-        os<<"cs mark :"<<_cs<<" ";
-        os<<"eng mark :"<<_eng<<" ";
+        os<<"math mark :"<<_math<<", ";
+        os<<"cs mark :"<<_cs<<", ";
+        os<<"eng mark :"<<_eng<<", ";
         os<<"phys mark :"<<_phys<<std::endl;
+        
+    }
+    friend std::ostream& operator<<(std::ostream &os, const Marks& dv){
+        if(&dv!=nullptr){
+            dv.Print(os);
+        }
+
+        return os;
     }
 
     Marks* GetCopy() override{
@@ -43,6 +52,24 @@ public:
         uint16_t phys=2+rand()%4;
         Marks* tmp=new Marks(math, cs, eng, phys);
         return tmp;
+    }
+    std::string ToStr()override{
+        std::string str="";
+        str+=std::to_string(_math)+" ";
+        str+=std::to_string(_cs)+" ";
+        str+=std::to_string(_eng)+" ";
+        str+=std::to_string(_phys);
+        return str;
+    }
+    void Deserialise(std::string str)override{
+        std::istringstream iss(str);
+        int math, cs, eng, phys;
+        iss >> math >> cs >> eng >> phys;
+        _math = static_cast<uint16_t>(math);
+        _cs = static_cast<uint16_t>(cs);
+        _eng = static_cast<uint16_t>(eng);
+        _phys = static_cast<uint16_t>(phys);
+
 
     }
 

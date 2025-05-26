@@ -11,6 +11,8 @@ public:
     DatValue(){}
     virtual DatValue* GetCopy()=0;
     virtual DatValue* GetRand()=0;
+    virtual std::string ToStr()=0;
+    virtual void Deserialise(std::string str)=0;
 
     friend std::ostream& operator<<(std::ostream &os, const DatValue& dv){
         if(&dv!=nullptr){

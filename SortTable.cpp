@@ -134,6 +134,25 @@ void SortTable::QuickSplit(PTabRecord* pMem, size_t size, size_t& pivot){
 }
 
 PDatValue SortTable::FindRecord(const Key& key){
+    _efficiency=0;
+    int left = 0;
+    int right = this->GetDataCount();
+    while (left <= right) {
+        _efficiency++;
+        
+        int mid = left + (right - left) / 2;
+        Key midKey = _records[mid]->GetKey(); 
+
+        if (midKey == key) {
+            return _records[mid]->GetData(); 
+        } else if (midKey < key) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    throw "key is not in the table";
+    return nullptr;
 
 }
 void SortTable::InsRecord(const Key& key, PDatValue value){

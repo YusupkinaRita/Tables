@@ -18,7 +18,7 @@ public:
     ListHashTable(size_t tabSize);
     ~ListHashTable();
 
-    bool IsFull();
+    bool IsFull()const override;
     PDatValue FindRecord(const Key& key)override;
     void InsRecord(const Key& key, PDatValue data)override;
     void DelRecord(const Key& key)override;

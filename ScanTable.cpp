@@ -2,6 +2,7 @@
 
 
 PDatValue ScanTable::FindRecord(const Key& key){
+    _efficiency=0;
     if(IsEmpty())
         throw "table is empty";
     Reset();

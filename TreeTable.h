@@ -8,7 +8,7 @@ protected:
     PTreeNode _pRoot;
     PTreeNode _pCur;
     PTreeNode* _ppRef;//
-    std::stack<PTreeNode> _stack;
+    //std::stack<PTreeNode> _stack;
     size_t _curPos;
     void PrintTreeTable(std::ostream& os, PTreeNode pNode);
     void DrawTreeTable(PTreeNode root,size_t lvl);
@@ -48,9 +48,9 @@ public:
 
 
 
-    bool Reset() override;
-    bool IsTabEnded()const override;
-    bool GoNext()override;
+    bool Reset() override{}
+    bool IsTabEnded()const override{}
+    bool GoNext()override{}
     Key GetKey() const override;
     PDatValue GetValuePtr()const override;
 

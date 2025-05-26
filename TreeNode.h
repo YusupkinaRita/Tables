@@ -1,7 +1,7 @@
 #include <iostream>
 #include "TabRecord.h"
 
-
+class TreeNode;
 using PTreeNode=TreeNode*;
 
 class TreeNode:public TabRecord{
@@ -10,7 +10,7 @@ protected:
     PTreeNode _pRight;
 
 public:
-    TreeNode(Key key="", PDatValue data, PTreeNode pl=nullptr,PTreeNode pr=nullptr ):TabRecord(key, data){
+    TreeNode(Key key="", PDatValue data=nullptr, PTreeNode pl=nullptr,PTreeNode pr=nullptr ):TabRecord(key, data){
         _pLeft=pl;
         _pRight=pr;
 
