@@ -4,7 +4,7 @@
 PDatValue ScanTable::FindRecord(const Key& key){
     _efficiency=0;
     if(IsEmpty())
-        throw "table is empty";
+        return nullptr;
     Reset();
     PDatValue res;
     bool x=0;
@@ -15,8 +15,8 @@ PDatValue ScanTable::FindRecord(const Key& key){
         x=GoNext();
         
     }
-    throw "the key is not in the table";
-    return 0;
+    //throw "the key is not in the table";
+    return nullptr;
 
 }
 void ScanTable::InsRecord(const Key& key, PDatValue value){
@@ -31,9 +31,9 @@ void ScanTable::InsRecord(const Key& key, PDatValue value){
 void ScanTable::DelRecord(const Key& key){
     PDatValue tmp=FindRecord(key);
     if(tmp==nullptr)
-        throw "no element with this key";
+         throw "no element with this key";
     else{
-        _records[_curPos]=_records[_dataCount-1];
-        _dataCount--;
+    _records[_curPos]=_records[_dataCount-1];
+    _dataCount--;
     }
 }

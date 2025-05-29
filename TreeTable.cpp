@@ -5,7 +5,7 @@
 
 PDatValue TreeTable::FindRecord(const Key& key){
     PTreeNode pNode=_pRoot;
-    _ppRef=&pNode;
+    _ppRef=&pNode;//=_pRoot
     _efficiency=0;
     while(pNode!=nullptr){
         _efficiency++;

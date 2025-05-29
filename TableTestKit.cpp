@@ -86,17 +86,16 @@ void TableTestKit::ShowTable(){
 void TableTestKit::FindRecord(size_t size){
     _find_efficiency=0;
     std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<> dist(0, _size);
+    std::uniform_int_distribution<> dist(0, size);
 
 
     for(size_t i=0;i<size;i++){
         size_t x=dist(rng);
         //std::string key=GenRandKey(rng,9)+" "+ GenRandKey(rng,5);
-        try{_table.FindRecord(_keys[x]);}
-        catch(const char*){
+        if(_table.FindRecord(_keys[x])==nullptr)
             _find_errors++;
 
-        }
+        
         size_t cur_find_eff=_table.GetEfficiency();
         if(cur_find_eff>_max_find_eff){
             _max_find_eff=cur_find_eff;
@@ -113,8 +112,8 @@ void TableTestKit::FindRecord(size_t size){
 void TableTestKit::DelRecord(size_t size){
     _del_efficiency=0;
     std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<> dist(0, _size);
-    for(size_t i=0;i<_keys.size();i++){
+    std::uniform_int_distribution<> dist(0, size);
+    for(size_t i=0;i<size;i++){
         size_t x=dist(rng);
         try{_table.DelRecord(_keys[x]);}
         catch(const char*){
@@ -135,14 +134,14 @@ void TableTestKit::DelRecord(size_t size){
 
 }
 
-void TableTestKit::PrintMetrics(size_t size){
+void TableTestKit::PrintMetrics(size_t count){
     auto start1 = std::chrono::high_resolution_clock::now();
-    FindRecord(size);
+    FindRecord(count);
     auto end1 = std::chrono::high_resolution_clock::now();
     auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1);
     std::cout << "Time for find: " << duration1.count() << std::endl;
     std::cout << "Errors for find: " << _find_errors<< std::endl;
-    std::cout << "Average efficiency for find: " << _find_efficiency/_size<< std::endl;
+    std::cout << "Average efficiency for find: " << _find_efficiency/count<< std::endl;
     std::cout << "Max efficiency for find: " << _max_find_eff<< std::endl;
     std::cout << "Min efficiency for find: " << _min_find_eff<< std::endl;
 
@@ -150,16 +149,16 @@ void TableTestKit::PrintMetrics(size_t size){
     std::cout<<std::endl;
 
     auto start2 = std::chrono::high_resolution_clock::now();
-    DelRecord(size);
+    DelRecord(count);
     auto end2 = std::chrono::high_resolution_clock::now();
     auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
     std::cout << "Time for delete: " << duration2.count() << std::endl;
     std::cout << "Errors for delete: " << _del_errors<< std::endl;
-    std::cout << "Average efficiency for delete: " << _del_efficiency/_size<< std::endl;
+    std::cout << "Average efficiency for delete: " << _del_efficiency/count<< std::endl;
     std::cout << "Max efficiency for delete: " << _max_del_eff<< std::endl;
     std::cout << "Min efficiency for delete: " << _min_del_eff<< std::endl;
 
-    std::cout<<"overall effiviency:"<<_overall_efficiency<<std::endl;
+    //std::cout<<"overall effiviency:"<<_overall_efficiency<<std::endl;
 
     
 

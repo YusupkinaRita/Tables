@@ -134,24 +134,30 @@ void SortTable::QuickSplit(PTabRecord* pMem, size_t size, size_t& pivot){
 }
 
 PDatValue SortTable::FindRecord(const Key& key){
+    if(IsEmpty())
+        return nullptr;
     _efficiency=0;
     int left = 0;
-    int right = this->GetDataCount();
+    int right = this->GetDataCount() - 1;
     while (left <= right) {
         _efficiency++;
         
-        int mid = left + (right - left) / 2;
-        Key midKey = _records[mid]->GetKey(); 
+        _curPos = left + (right - left) / 2;
+        Key midKey = _records[_curPos]->GetKey(); 
 
         if (midKey == key) {
-            return _records[mid]->GetData(); 
+            return _records[_curPos]->GetData(); 
         } else if (midKey < key) {
-            left = mid + 1;
+            left = _curPos + 1;
         } else {
-            right = mid - 1;
+            right = _curPos - 1;
         }
+
     }
-    throw "key is not in the table";
+    if (_records[_curPos]->GetKey() < key){
+        _curPos++;
+    }
+    
     return nullptr;
 
 }
@@ -173,6 +179,8 @@ void SortTable::DelRecord(const Key& key){
         throw "table is empty";
 
     PDatValue tmp=FindRecord(key);
+    if(tmp==nullptr)
+        throw "no element with this key";
     if(tmp!=nullptr){
         for(size_t i=_curPos;i<_dataCount-1;i++){
             _records[i]=_records[i+1];
