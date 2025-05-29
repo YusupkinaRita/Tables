@@ -9,13 +9,14 @@ PDatValue ScanTable::FindRecord(const Key& key){
     PDatValue res;
     bool x=0;
     while(x!=1){
+        _efficiency++;
         if (GetKey(Current)==key)
             return GetValuePtr(Current);
         x=GoNext();
-        _efficiency++;
+        
     }
-    std::cout<<"the key is not in the table"<<std::endl;
-        return 0;
+    throw "the key is not in the table";
+    return 0;
 
 }
 void ScanTable::InsRecord(const Key& key, PDatValue value){

@@ -21,9 +21,8 @@ static Key GenRandKey(std::mt19937& rng, size_t size=8){
 }
 
 
-void TableTestKit::GenBenchmarkTab(PDatValue tmp, size_t size){
-    std::string filename="benchmark.txt";
-
+void TableTestKit::GenBenchmarkTab(PDatValue tmp, std::string filename, size_t size){
+    _size=size;
     if (std::filesystem::exists(filename)) {
         std::ifstream file_s(filename);
 
@@ -84,49 +83,81 @@ void TableTestKit::ShowTable(){
 
 }
 
-void TableTestKit::FindRecord(){
-    for(size_t i=0;i<_keys.size();i++){
-        size_t x=rand()%_keys.size();
+void TableTestKit::FindRecord(size_t size){
+    _find_efficiency=0;
+    std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<> dist(0, _size);
+
+
+    for(size_t i=0;i<size;i++){
+        size_t x=dist(rng);
+        //std::string key=GenRandKey(rng,9)+" "+ GenRandKey(rng,5);
         try{_table.FindRecord(_keys[x]);}
         catch(const char*){
             _find_errors++;
 
         }
+        size_t cur_find_eff=_table.GetEfficiency();
+        if(cur_find_eff>_max_find_eff){
+            _max_find_eff=cur_find_eff;
+        }
+        if(cur_find_eff<_min_find_eff)
+            _min_find_eff=cur_find_eff;
+        
+        _find_efficiency+=cur_find_eff;
+
     }
-    _overall_efficiency+=_table.GetEfficiency();
+    _overall_efficiency+=_find_efficiency;
 
 }
-void TableTestKit::DelRecord(){
+void TableTestKit::DelRecord(size_t size){
+    _del_efficiency=0;
+    std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<> dist(0, _size);
     for(size_t i=0;i<_keys.size();i++){
-        int x=rand()%100;
+        size_t x=dist(rng);
         try{_table.DelRecord(_keys[x]);}
         catch(const char*){
             _del_errors++;
 
         }
+        size_t cur_del_eff=_table.GetEfficiency();
+        if(cur_del_eff>_max_del_eff){
+            _max_del_eff=cur_del_eff;
+        }
+        if(cur_del_eff<_min_del_eff)
+            _min_del_eff=cur_del_eff;
+        
+        _del_efficiency+=cur_del_eff;
+
     }
-    _overall_efficiency+=_table.GetEfficiency();
+    _overall_efficiency+=_del_efficiency;
 
 }
 
-void TableTestKit::PrintMetrics(){
+void TableTestKit::PrintMetrics(size_t size){
     auto start1 = std::chrono::high_resolution_clock::now();
-    FindRecord();
+    FindRecord(size);
     auto end1 = std::chrono::high_resolution_clock::now();
-    auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1);
+    auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1);
     std::cout << "Time for find: " << duration1.count() << std::endl;
     std::cout << "Errors for find: " << _find_errors<< std::endl;
-    size_t find_efficiency=_overall_efficiency;
-    std::cout << "Efficiency for find: " << find_efficiency<< std::endl;
+    std::cout << "Average efficiency for find: " << _find_efficiency/_size<< std::endl;
+    std::cout << "Max efficiency for find: " << _max_find_eff<< std::endl;
+    std::cout << "Min efficiency for find: " << _min_find_eff<< std::endl;
+
+    
+    std::cout<<std::endl;
 
     auto start2 = std::chrono::high_resolution_clock::now();
-    DelRecord();
+    DelRecord(size);
     auto end2 = std::chrono::high_resolution_clock::now();
-    auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2);
+    auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
     std::cout << "Time for delete: " << duration2.count() << std::endl;
     std::cout << "Errors for delete: " << _del_errors<< std::endl;
-    size_t del_efficiency=_overall_efficiency-find_efficiency;
-    std::cout << "Efficiency for find: " << del_efficiency<< std::endl;
+    std::cout << "Average efficiency for delete: " << _del_efficiency/_size<< std::endl;
+    std::cout << "Max efficiency for delete: " << _max_del_eff<< std::endl;
+    std::cout << "Min efficiency for delete: " << _min_del_eff<< std::endl;
 
     std::cout<<"overall effiviency:"<<_overall_efficiency<<std::endl;
 
