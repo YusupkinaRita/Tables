@@ -21,8 +21,6 @@ protected:
 public:
     SortTable(size_t tabSize=25):ScanTable(tabSize){}
     SortTable(const ScanTable& st):ScanTable(st){
-        
-
     }
     SortTable& operator=(const ScanTable& st);
 

@@ -29,7 +29,18 @@ bool ListHashTable::IsFull()const{
 }
 
 
-PDatValue ListHashTable::FindRecord(const Key& key){}
+PDatValue ListHashTable::FindRecord(const Key& key){
+    _efficiency = 0;
+    _curList = HashFunc(key) % _tabSize;
+    for (_curElem = _lists[_curList].begin(); _curElem != _lists[_curList].end();_curElem++) {
+        _efficiency++;
+        if ((*_curElem)->GetKey() == key) {
+            return (*_curElem)->GetData();
+        }
+    }
+    return nullptr;
+    
+}
 void ListHashTable::InsRecord(const Key& key, PDatValue data){
     if(IsFull()){
         throw "no memory";
@@ -40,6 +51,7 @@ void ListHashTable::InsRecord(const Key& key, PDatValue data){
     _lists[_curList].push_front(new TabRecord(key, data));
     _dataCount++;
 }
+
 void ListHashTable::DelRecord(const Key& key){
     PDatValue tmp=FindRecord(key);
     if(tmp==nullptr)
