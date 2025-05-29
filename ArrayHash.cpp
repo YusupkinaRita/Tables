@@ -11,7 +11,7 @@ ArrayHash::ArrayHash(size_t size, size_t hashStep):HashTable(),_tabSize(size), _
 }
 
 
-bool ArrayHash::IsFull(){
+bool ArrayHash::IsFull()const{
     return _dataCount>=_tabSize;
 
 }

@@ -3,6 +3,7 @@
 #include "TableTestKit.h"
 #include "SortTable.h"
 #include "Marks.h"
+#include "ArrayHash.h"
 
 
 int main(){
@@ -23,6 +24,10 @@ int main(){
     test_sort.GenBenchmarkTab(mark_test, "benchmarksort.txt", 10000);
     test_sort.ShowTable();
     test_sort.PrintMetrics(1000);
+
+    ArrayHash xx=ArrayHash();
+
+    
 
 
 

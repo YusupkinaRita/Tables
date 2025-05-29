@@ -26,7 +26,7 @@ public:
         delete _mark;
     }
 
-    bool IsFull();
+    bool IsFull()const;
     PDatValue FindRecord(const Key& key)override;
     void InsRecord(const Key& key, PDatValue data)override;
     void DelRecord(const Key& key)override;
