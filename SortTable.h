@@ -7,7 +7,7 @@ enum SortMethod{Insert, Merge, Quick};
 class SortTable:public ScanTable{
 private:
 protected:
-    SortMethod _sortMethod;
+    SortMethod _sortMethod=SortMethod::Quick;
     void SortData();
     void InsertSort(PTabRecord* pMem, size_t count);
 
@@ -20,8 +20,9 @@ protected:
 
 public:
     SortTable(size_t tabSize=25):ScanTable(tabSize){}
-    SortTable(const ScanTable& st):ScanTable(st){
-    }
+    // SortTable(const ScanTable& st):ScanTable(st){
+    //     *this=st;
+    // }
     SortTable& operator=(const ScanTable& st);
 
 

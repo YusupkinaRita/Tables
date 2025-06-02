@@ -184,6 +184,7 @@ void SortTable::DelRecord(const Key& key){
     if(tmp!=nullptr){
         for(size_t i=_curPos;i<_dataCount-1;i++){
             _records[i]=_records[i+1];
+            _efficiency++;
 
         }
         _records[_dataCount]=nullptr;

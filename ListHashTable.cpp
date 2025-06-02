@@ -63,6 +63,8 @@ void ListHashTable::DelRecord(const Key& key){
 bool ListHashTable::Reset(){
     _curList=0;
     _curElem=_lists[_curList].begin();
+    if(*_curElem==nullptr)
+        GoNext();
     return IsTabEnded();
 }
 bool ListHashTable::IsTabEnded()const {
@@ -81,7 +83,13 @@ bool ListHashTable::GoNext(){
         
         if(_curElem==_lists[_curList].end()){
             _curList++;
-            _curElem=_lists[_curList].begin();
+            while(_lists[_curList].empty()){
+                _curList++;
+                _curElem=_lists[_curList].begin();
+            }
+        }
+        if (*_curElem == nullptr){
+            std::cout<<"stop\n";
         }
         
 
@@ -91,7 +99,7 @@ bool ListHashTable::GoNext(){
 }
 
 Key ListHashTable::GetKey() const{
-    if(IsTabEnded())
+    if(IsTabEnded()||*_curElem==nullptr)
         return "";
     return (*_curElem)->GetKey();
 }

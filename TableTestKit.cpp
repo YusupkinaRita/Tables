@@ -74,6 +74,7 @@ void TableTestKit::ShowTable(){
     if(_table.IsEmpty())
         throw "table is empty";
     _table.Reset();
+    
     bool x=0;
     while(x!=1){
         std::cout << "Key: " << _table.GetKey()<< ", Value: "<<*(_table.GetValuePtr())<<std::endl;
@@ -112,7 +113,7 @@ void TableTestKit::FindRecord(size_t size){
 void TableTestKit::DelRecord(size_t size){
     _del_efficiency=0;
     std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<> dist(0, size);
+    std::uniform_int_distribution<> dist(0, _table.GetDataCount());
     for(size_t i=0;i<size;i++){
         size_t x=dist(rng);
         try{_table.DelRecord(_keys[x]);}

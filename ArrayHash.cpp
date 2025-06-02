@@ -53,7 +53,7 @@ void ArrayHash::InsRecord(const Key& key, PDatValue data){
     if(_freePos!=-1){
         _curPos=_freePos;
     }
-    _records[_curPos]=new TabRecord(key, pVal);
+    _records[_curPos]=new TabRecord(key, data);
     _dataCount++;
     
 

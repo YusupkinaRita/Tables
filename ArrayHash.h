@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "HashTable.h"
 #include "ArrayTable.h"
@@ -15,10 +16,10 @@ protected:
         return (pos+_hashStep)%_tabSize;
     }
 public:
-    ArrayHash(size_t size=100, size_t hashStep=7);//про шаг нужно посмотреть, будут вопросы по нему
+    ArrayHash(size_t size=100, size_t hashStep=7);
     ~ArrayHash(){
         for(size_t i=0; i<_dataCount;i++){
-            if(_records[i]!=nullptr)
+            if(_records[i]!=nullptr&&_records[i]!=_mark)
                 delete _records[i];
         }
 
