@@ -108,3 +108,14 @@ PDatValue ListHashTable::GetValuePtr()const {
         return nullptr;
     return (*_curElem)->GetData();
 }
+
+size_t ListHashTable::GetMaxList(){
+    size_t list_max=0;
+    for(size_t i=0;i<_tabSize;i++){
+        if(_lists[i].size()>list_max)
+            list_max=_lists[i].size();
+
+    }
+    return list_max;
+
+}

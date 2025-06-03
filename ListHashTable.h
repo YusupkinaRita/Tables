@@ -29,5 +29,6 @@ public:
 
     Key GetKey() const override;
     PDatValue GetValuePtr()const override;
+    size_t GetMaxList();
 
 };

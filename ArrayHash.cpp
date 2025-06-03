@@ -22,9 +22,9 @@ PDatValue ArrayHash::FindRecord(const Key& key){
     _curPos=HashFunc(key)%_tabSize;
     for(size_t i=0;i<_tabSize;i++){
         _efficiency++;
-        if(_records[_curPos]==nullptr)
-            break;
-        
+        if(_records[_curPos]==nullptr){
+            return nullptr;
+        }
         else{
             if(_records[_curPos]==_mark){
                 if(_freePos==-1)
