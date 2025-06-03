@@ -28,7 +28,8 @@ public:
     }
 
     virtual PDatValue GetCopy(){
-        return _data->GetCopy(); 
+        TabRecord* copy=new TabRecord(_key, _data);
+        return copy; 
     }
     virtual PDatValue GetRand(){
         return _data->GetRand(); 

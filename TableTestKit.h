@@ -23,6 +23,13 @@ private:
 
 public:
     TableTestKit(Table& table):_table(table){
+        bool x=0;
+        _table.Reset();
+        while(x!=1){
+            _keys.push_back(_table.GetKey());
+            x=_table.GoNext();
+        }
+
     };
     void FillTable();//не хочу
 

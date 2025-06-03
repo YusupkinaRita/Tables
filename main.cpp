@@ -11,18 +11,19 @@ int main(){
     srand(time(NULL));
     Marks* mark_test=new Marks(5,5,5,5);
 
-    ScanTable test_table=ScanTable(20000);
+    ScanTable test_table=ScanTable(10000);
     TableTestKit test=TableTestKit(test_table);
-    test.GenBenchmarkTab(mark_test, "benchmarkscan.txt", 20000);
+    test.GenBenchmarkTab(mark_test, "benchmarkscan.txt", 10000);
     // test.ShowTable();
     // test.PrintMetrics(1000);
 
 
 
-    SortTable sort_table = SortTable();
+    SortTable sort_table = SortTable(10000);
     sort_table=test_table;
     TableTestKit t=TableTestKit(sort_table);
-    t.ShowTable();
+    //t.ShowTable();
+    t.PrintMetrics(1000);
 
 
     //TableTestKit test_sort=TableTestKit(sort_table);

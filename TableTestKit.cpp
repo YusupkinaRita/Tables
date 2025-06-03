@@ -87,12 +87,11 @@ void TableTestKit::ShowTable(){
 void TableTestKit::FindRecord(size_t size){
     _find_efficiency=0;
     std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<> dist(0, size);
+    std::uniform_int_distribution<> dist(0, _table.GetDataCount()-1);
 
 
     for(size_t i=0;i<size;i++){
         size_t x=dist(rng);
-        //std::string key=GenRandKey(rng,9)+" "+ GenRandKey(rng,5);
         if(_table.FindRecord(_keys[x])==nullptr)
             _find_errors++;
 
@@ -113,7 +112,7 @@ void TableTestKit::FindRecord(size_t size){
 void TableTestKit::DelRecord(size_t size){
     _del_efficiency=0;
     std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<> dist(0, _table.GetDataCount());
+    std::uniform_int_distribution<> dist(0, _table.GetDataCount()-1);
     for(size_t i=0;i<size;i++){
         size_t x=dist(rng);
         try{_table.DelRecord(_keys[x]);}

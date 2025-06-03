@@ -113,11 +113,11 @@ void SortTable::QuickSplit(PTabRecord* pMem, size_t size, size_t& pivot){
     PTabRecord pTmp;
     size_t i1=1, i2=size-1;
     while(i1<=i2){
-        while(i1<size && !(pMem[i1]->_key > pPivot->_key)){
+        while((i1<size) && (!(pMem[i1]->GetKey() > pPivot->GetKey()))){
             i1++;
         }
 
-        while(pMem[i1]->_key > pPivot->_key){
+        while (i2 > 0 && pMem[i2]->GetKey() > pPivot->GetKey()) {
             i2--;
         }
         if(i1<i2){
