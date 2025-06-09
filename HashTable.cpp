@@ -1,11 +1,10 @@
 #include "HashTable.h"
 
 
-size_t HashTable::HashFunc(const Key& key){
-    size_t index=0;
-    size_t size=key.size();
-    for(size_t i=0;i<size;i++){
-        index+=(size_t)key[i];//за самую быструю хэш функцию плюсик
+size_t HashTable::HashFunc(const Key& key){//за хорошую хэш функцию +
+    size_t hash = 5381;
+    for (char c : key) {
+        hash = ((hash << 5) + hash) + c; // djb2
     }
-    return index;
+    return hash;
 }

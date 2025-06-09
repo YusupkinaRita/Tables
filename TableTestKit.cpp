@@ -5,17 +5,18 @@
 #include <filesystem>
 #include <random>
 
-static Key GenRandKey(std::mt19937& rng, size_t size=8){
+static Key GenRandKey(std::mt19937& rng, size_t count=8){
     std::string letters= "abcdefghijklmnopqrstuvwxyz";
 
     std::uniform_int_distribution<> dist(0, letters.size() - 1);
 
     std::string res_key="";
 
-    for(size_t i=0; i<size; i++){
+    for(size_t i=0; i<count; i++){
         if(i==0)
             res_key+=std::toupper(letters[dist(rng)]);
-        res_key+=letters[dist(rng)];
+        else
+            res_key+=letters[dist(rng)];
    }
    return res_key;
 }
@@ -55,7 +56,7 @@ void TableTestKit::GenBenchmarkTab(PDatValue tmp, std::string filename, size_t s
             return;
         }
         for(size_t i=0;i<size;i++){
-            std::string key=GenRandKey(rng,9)+" "+ GenRandKey(rng,5);
+            std::string key=GenRandKey(rng,7)+" "+ GenRandKey(rng,4);
             PDatValue val=tmp->GetRand();
             _table.InsRecord(key, val);
             _keys.push_back(key);
@@ -138,7 +139,7 @@ void TableTestKit::PrintMetrics(size_t count){
     auto start1 = std::chrono::high_resolution_clock::now();
     FindRecord(count);
     auto end1 = std::chrono::high_resolution_clock::now();
-    auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1);
+    auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1);
     std::cout << "Time for find: " << duration1.count() << std::endl;
     std::cout << "Errors for find: " << _find_errors<< std::endl;
     std::cout << "Average efficiency for find: " << _find_efficiency/count<< std::endl;
@@ -151,7 +152,7 @@ void TableTestKit::PrintMetrics(size_t count){
     auto start2 = std::chrono::high_resolution_clock::now();
     DelRecord(count);
     auto end2 = std::chrono::high_resolution_clock::now();
-    auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
+    auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2);
     std::cout << "Time for delete: " << duration2.count() << std::endl;
     std::cout << "Errors for delete: " << _del_errors<< std::endl;
     std::cout << "Average efficiency for delete: " << _del_efficiency/count<< std::endl;
