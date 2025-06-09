@@ -30,7 +30,7 @@ bool ListHashTable::IsFull()const{
 
 
 PDatValue ListHashTable::FindRecord(const Key& key){
-    _efficiency = 0;
+    _efficiency = 1;
     _curList = HashFunc(key) % _tabSize;
     for (_curElem = _lists[_curList].begin(); _curElem != _lists[_curList].end();_curElem++) {
         _efficiency++;
