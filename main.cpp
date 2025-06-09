@@ -30,10 +30,10 @@ int main(){
     // test_sort.GenBenchmarkTab(mark_test, "benchmarksort.txt", 20000);
     //test_sort.PrintMetrics(1000);
 
-    // ArrayHash xx=ArrayHash(20000);
-    // TableTestKit test_hash=TableTestKit(xx);
-    // test_hash.GenBenchmarkTab(mark_test, "benchmarkhash.txt", 10000);
-    // test_hash.PrintMetrics(1000);
+    ArrayHash xx=ArrayHash(20000);
+    TableTestKit test_hash=TableTestKit(xx);
+    test_hash.GenBenchmarkTab(mark_test, "benchmarkhash.txt", 10000);
+    test_hash.PrintMetrics(1000);
 
 
     
@@ -49,10 +49,10 @@ int main(){
     // tree_test.PrintMetrics(1000);
 
 
-    AVLTreeTable avltab;
-    TableTestKit avl_test=TableTestKit(avltab);
-    avl_test.GenBenchmarkTab(mark_test, "avltable.txt",20000);
-    avl_test.PrintMetrics(1000);
+    // AVLTreeTable avltab;
+    // TableTestKit avl_test=TableTestKit(avltab);
+    // avl_test.GenBenchmarkTab(mark_test, "avltable.txt",20000);
+    // avl_test.PrintMetrics(1000);
 
 
     
